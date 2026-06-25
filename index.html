@@ -114,6 +114,18 @@
 </head>
 <body>
 
+<!-- Preloader -->
+<div id="preloader" class="preloader">
+    <div class="preloader__content">
+        <div class="preloader__circle-wrap">
+            <div class="preloader__circle"></div>
+            <div class="preloader__center-sparkle">✧</div>
+        </div>
+        <div class="preloader__logo">Creative Events <span>by Apollo</span></div>
+        <div class="preloader__status" id="preloaderStatus">Inspiring Ideas...</div>
+    </div>
+</div>
+
 <!-- ============================================================ -->
 <!-- NAVIGATION -->
 <!-- ============================================================ -->
@@ -141,14 +153,14 @@
 <section class="hero" id="home">
     <div class="hero__stage">
         <div class="hero__reel hero__reel--desktop">
-            <video class="hero__vid hero__vid--active" src="assets/videos/desktop1.mp4" poster="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1400&h=800&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="desktop1.mp4" data-index="0"></video>
-            <video class="hero__vid" src="assets/videos/desktop2.mp4" poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&h=800&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="desktop2.mp4" data-index="1"></video>
-            <video class="hero__vid" src="assets/videos/desktop3.mp4" poster="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1400&h=800&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="desktop3.mp4" data-index="2"></video>
+            <video class="hero__vid hero__vid--active" data-src="assets/videos/desktop1.mp4" data-poster="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1400&h=800&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="desktop1.mp4" data-index="0"></video>
+            <video class="hero__vid" data-src="assets/videos/desktop2.mp4" data-poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&h=800&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="desktop2.mp4" data-index="1"></video>
+            <video class="hero__vid" data-src="assets/videos/desktop3.mp4" data-poster="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1400&h=800&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="desktop3.mp4" data-index="2"></video>
         </div>
         <div class="hero__reel hero__reel--mobile">
-            <video class="hero__vid hero__vid--active" src="assets/videos/mobile%201.mp4" poster="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=1000&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="mobile 1.mp4" data-index="0"></video>
-            <video class="hero__vid" src="assets/videos/mobile%202.mp4" poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="mobile 2.mp4" data-index="1"></video>
-            <video class="hero__vid" src="assets/videos/mobile%203.mp4" poster="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&h=1000&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="mobile 3.mp4" data-index="2"></video>
+            <video class="hero__vid hero__vid--active" data-src="assets/videos/mobile%201.mp4" data-poster="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=1000&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="mobile 1.mp4" data-index="0"></video>
+            <video class="hero__vid" data-src="assets/videos/mobile%202.mp4" data-poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=1000&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="mobile 2.mp4" data-index="1"></video>
+            <video class="hero__vid" data-src="assets/videos/mobile%203.mp4" data-poster="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&h=1000&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="mobile 3.mp4" data-index="2"></video>
         </div>
     </div>
     <div class="hero__veil"></div>
@@ -201,7 +213,7 @@
     <div class="local__in">
         <div class="local__visual">
             <div class="local__frame">
-                <video src="assets/videos/desktop2.mp4" poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="desktop2.mp4"></video>
+                <video class="lazy-video" data-src="assets/videos/desktop2.mp4" data-poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="desktop2.mp4"></video>
                 <span class="local__frame-tag">The Light Smile</span>
             </div>
         </div>
@@ -229,7 +241,7 @@
         <div class="services__grid">
             <div class="svc svc--feat">
                 <div class="svc__media">
-                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=700&h=480&fit=crop&auto=format" alt="Wedding planning and stage decoration in Vadakara" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=700&h=480&fit=crop&auto=format&q=70&fm=webp" alt="Wedding planning and stage decoration in Vadakara" loading="lazy">
                     <div class="svc__media-cap">
                         <span class="svc__num">01</span>
                         <div><h3>Wedding Planning in Vadakara</h3><p>Elegant wedding planning, décor coordination, stage design, and guest experience support for families across Vadakara and Kozhikode.</p></div>
@@ -259,12 +271,12 @@
             <p class="folio__sub">A glimpse into events shaped with warmth, detail, and beautiful smiles across Vadakara and Kozhikode.</p>
         </div>
         <div class="folio__grid">
-            <div class="fl fl--lg" onclick="enquirePortfolio('Wedding Stage Decoration')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=550&fit=crop&auto=format" alt="Wedding stage decoration" loading="lazy"></div><div class="fl__info"><span>Wedding</span><h4>Wedding Stage Decoration</h4></div></div>
-            <div class="fl fl--tall" onclick="enquirePortfolio('Birthday Decoration')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=500&h=700&fit=crop&auto=format" alt="Birthday decoration" loading="lazy"></div><div class="fl__info"><span>Birthday</span><h4>Birthday Decoration</h4></div></div>
-            <div class="fl" onclick="enquirePortfolio('Corporate Event Setup')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&h=400&fit=crop&auto=format" alt="Corporate event setup" loading="lazy"></div><div class="fl__info"><span>Corporate</span><h4>Corporate Event Setup</h4></div></div>
-            <div class="fl" onclick="enquirePortfolio('Engagement Décor')"><div class="fl__media"><video src="assets/videos/mobile%203.mp4" poster="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=500&h=400&fit=crop&auto=format" autoplay muted loop playsinline preload="metadata" data-name="mobile 3.mp4"></video></div><div class="fl__info"><span>Décor</span><h4>Engagement Décor</h4></div></div>
-            <div class="fl fl--wide" onclick="enquirePortfolio('Outdoor Celebration')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=700&h=380&fit=crop&auto=format" alt="Outdoor celebration" loading="lazy"></div><div class="fl__info"><span>Outdoor</span><h4>Outdoor Celebration</h4></div></div>
-            <div class="fl" onclick="enquirePortfolio('Family Function')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=400&fit=crop&auto=format" alt="Family function" loading="lazy"></div><div class="fl__info"><span>Family</span><h4>Family Function</h4></div></div>
+            <div class="fl fl--lg" onclick="enquirePortfolio('Wedding Stage Decoration')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=550&fit=crop&auto=format&q=70&fm=webp" alt="Wedding stage decoration" loading="lazy"></div><div class="fl__info"><span>Wedding</span><h4>Wedding Stage Decoration</h4></div></div>
+            <div class="fl fl--tall" onclick="enquirePortfolio('Birthday Decoration')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=500&h=700&fit=crop&auto=format&q=70&fm=webp" alt="Birthday decoration" loading="lazy"></div><div class="fl__info"><span>Birthday</span><h4>Birthday Decoration</h4></div></div>
+            <div class="fl" onclick="enquirePortfolio('Corporate Event Setup')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&h=400&fit=crop&auto=format&q=70&fm=webp" alt="Corporate event setup" loading="lazy"></div><div class="fl__info"><span>Corporate</span><h4>Corporate Event Setup</h4></div></div>
+            <div class="fl" onclick="enquirePortfolio('Engagement Décor')"><div class="fl__media"><video class="lazy-video" data-src="assets/videos/mobile%203.mp4" data-poster="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=500&h=400&fit=crop&auto=format&q=70&fm=webp" muted loop playsinline preload="none" data-name="mobile 3.mp4"></video></div><div class="fl__info"><span>Décor</span><h4>Engagement Décor</h4></div></div>
+            <div class="fl fl--wide" onclick="enquirePortfolio('Outdoor Celebration')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=700&h=380&fit=crop&auto=format&q=70&fm=webp" alt="Outdoor celebration" loading="lazy"></div><div class="fl__info"><span>Outdoor</span><h4>Outdoor Celebration</h4></div></div>
+            <div class="fl" onclick="enquirePortfolio('Family Function')"><div class="fl__media"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=400&fit=crop&auto=format&q=70&fm=webp" alt="Family function" loading="lazy"></div><div class="fl__info"><span>Family</span><h4>Family Function</h4></div></div>
         </div>
     </div>
 </section>

@@ -52,13 +52,257 @@ if(DOM.form){DOM.form.addEventListener('submit',function(e){e.preventDefault();v
 /* === FAQ ACCORDION === */
 document.querySelectorAll('.faq__q').forEach(function(btn){btn.addEventListener('click',function(){var item=this.parentElement,open=item.classList.contains('open');document.querySelectorAll('.faq__item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq__q').setAttribute('aria-expanded','false');});if(!open){item.classList.add('open');this.setAttribute('aria-expanded','true');}});});
 
-/* === HERO VIDEO ROTATION === */
-var hs=document.getElementById('heroSlides');
-if(hs){var cs=0,ts=3,si,dv=document.querySelectorAll('.hero__reel--desktop .hero__vid'),mv=document.querySelectorAll('.hero__reel--mobile .hero__vid'),dots=hs.querySelectorAll('.hero__slide-dot');function ss(i){cs=i;var v=innerWidth<768?mv:dv;v.forEach(function(x){x.classList.remove('hero__vid--active');});if(v[cs])v[cs].classList.add('hero__vid--active');dots.forEach(function(x){x.classList.remove('active');});if(dots[cs])dots[cs].classList.add('active');}function ns2(){ss((cs+1)%ts);}si=setInterval(ns2,6000);dots.forEach(function(d){d.addEventListener('click',function(){var i=parseInt(this.getAttribute('data-slide'));if(!isNaN(i)){ss(i);clearInterval(si);si=setInterval(ns2,6000);}});});document.addEventListener('visibilitychange',function(){if(document.hidden)clearInterval(si);else si=setInterval(ns2,6000);});}
+/* === HERO VIDEO ROTATION & LAZY LOADING === */
+var hs = document.getElementById('heroSlides');
+if (hs) {
+    var cs = 0, ts = 3, si;
+    var dv = document.querySelectorAll('.hero__reel--desktop .hero__vid');
+    var mv = document.querySelectorAll('.hero__reel--mobile .hero__vid');
+    var dots = hs.querySelectorAll('.hero__slide-dot');
+    var isMobile = window.innerWidth < 768;
+
+    function playVideo(video) {
+        if (!video) return;
+        
+        video.muted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+
+        if (!video.src) {
+            var src = video.getAttribute('data-src');
+            if (src) {
+                video.src = src;
+                video.load();
+            }
+        }
+
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(err) {
+                console.warn("Hero video play delayed, waiting for canplay: ", err);
+            });
+        }
+
+        video.addEventListener('canplay', function onCanPlay() {
+            video.play().catch(function(e) {
+                console.warn("Hero video play failed in canplay: ", e);
+            });
+            video.removeEventListener('canplay', onCanPlay);
+        });
+    }
+
+    function pauseVideo(video) {
+        if (video && video.src) {
+            video.pause();
+        }
+    }
+
+    function updateHeroVideos() {
+        var activeReel = isMobile ? mv : dv;
+        var inactiveReel = isMobile ? dv : mv;
+
+        // Update active reel
+        activeReel.forEach(function(vid, index) {
+            if (index === cs) {
+                vid.classList.add('hero__vid--active');
+                playVideo(vid);
+            } else {
+                vid.classList.remove('hero__vid--active');
+                pauseVideo(vid);
+            }
+        });
+
+        // Ensure inactive reel is hidden and paused
+        inactiveReel.forEach(function(vid) {
+            vid.classList.remove('hero__vid--active');
+            pauseVideo(vid);
+        });
+
+        // Update dots
+        dots.forEach(function(dot, index) {
+            dot.classList.toggle('active', index === cs);
+        });
+
+        // Preload next video in active reel
+        var nextIndex = (cs + 1) % ts;
+        var nextVid = activeReel[nextIndex];
+        if (nextVid && !nextVid.src) {
+            var nextSrc = nextVid.getAttribute('data-src');
+            if (nextSrc) {
+                nextVid.src = nextSrc;
+                nextVid.load();
+            }
+        }
+    }
+
+    function rotateSlide() {
+        cs = (cs + 1) % ts;
+        updateHeroVideos();
+    }
+
+    // Initialize Hero Videos
+    updateHeroVideos();
+    si = setInterval(rotateSlide, 6000);
+
+    // Click navigation dots
+    dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            var i = parseInt(this.getAttribute('data-slide'));
+            if (!isNaN(i)) {
+                cs = i;
+                updateHeroVideos();
+                clearInterval(si);
+                si = setInterval(rotateSlide, 6000);
+            }
+        });
+    });
+
+    // Handle view size adjustments
+    window.addEventListener('resize', function() {
+        var newIsMobile = window.innerWidth < 768;
+        if (newIsMobile !== isMobile) {
+            isMobile = newIsMobile;
+            updateHeroVideos();
+        }
+    }, { passive: true });
+
+    // Handle visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            clearInterval(si);
+            var activeReel = isMobile ? mv : dv;
+            if (activeReel[cs]) pauseVideo(activeReel[cs]);
+        } else {
+            si = setInterval(rotateSlide, 6000);
+            var activeReel = isMobile ? mv : dv;
+            if (activeReel[cs]) playVideo(activeReel[cs]);
+        }
+    });
+}
+
+/* === LAZY LOAD NON-HERO VIDEOS === */
+if ('IntersectionObserver' in window) {
+    var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+            var video = entry.target;
+            if (entry.isIntersecting) {
+                video.muted = true;
+                video.playsInline = true;
+                video.autoplay = true;
+
+                if (!video.src) {
+                    var src = video.getAttribute('data-src');
+                    if (src) {
+                        video.src = src;
+                        video.load();
+                    }
+                }
+                
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(err) {
+                        console.warn("Lazy video play delayed, waiting for canplay: ", err);
+                    });
+                }
+
+                video.addEventListener('canplay', function onCanPlay() {
+                    video.play().catch(function(e) {
+                        console.warn("Lazy video play failed in canplay: ", e);
+                    });
+                    video.removeEventListener('canplay', onCanPlay);
+                });
+            } else {
+                if (video.src) {
+                    video.pause();
+                }
+            }
+        });
+    }, { rootMargin: '0px 0px 200px 0px' });
+
+    document.querySelectorAll('.lazy-video').forEach(function(video) {
+        lazyVideoObserver.observe(video);
+    });
+} else {
+    // Fallback if IntersectionObserver is not supported
+    document.querySelectorAll('.lazy-video').forEach(function(video) {
+        var src = video.getAttribute('data-src');
+        if (src) {
+            video.muted = true;
+            video.playsInline = true;
+            video.autoplay = true;
+
+            video.src = src;
+            video.load();
+            video.play().catch(function(err) {
+                console.warn("Lazy video play prevented: ", err);
+            });
+        }
+    });
+}
 
 /* === MEDIA FALLBACKS === */
 document.querySelectorAll('video').forEach(function(v){var n=v.getAttribute('data-name')||v.src;v.addEventListener('error',function(){console.warn('\u26A0 Video failed: '+n);var p=v.closest('.hero__stage,.local__frame,.fl__media');if(p){p.style.background='#F3D9D3';p.style.minHeight='160px';}v.style.opacity='0.15';});v.addEventListener('loadeddata',function(){console.log('\u2713 Video: '+n);});});
 document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',function(){var p=i.closest('.fl__media,.svc__media');if(p){p.style.background='#FAECE8';p.style.minHeight='160px';p.style.display='flex';p.style.alignItems='center';p.style.justifyContent='center';var s=document.createElement('span');s.innerHTML='\u2727';s.style.cssText='font-size:2rem;color:#B99A5F;opacity:0.3;';i.style.display='none';p.appendChild(s);}});});
 
-addEventListener('load',function(){var v=document.querySelectorAll('video'),l=0;v.forEach(function(x){if(x.readyState>=2)l++;});console.log('%c\u2726 Creative Events by Apollo %c\u00b7 %cThe Light Smile %c\u00b7 Vadakara, Kerala','color:#B99A5F;','color:#7B746A;','font-style:italic;color:#7B746A;','font-size:0.7rem;color:#B0ACA5;');console.log('Videos: '+l+'/'+v.length+' \u2014 all buttons active');});
+/* === PRELOADER LOGIC === */
+(function() {
+    var preloader = document.getElementById('preloader');
+    var preloaderStatus = document.getElementById('preloaderStatus');
+    
+    if (preloader) {
+        var progress = 10;
+        var statusTexts = [
+            { limit: 35, text: "Inspiring Ideas..." },
+            { limit: 65, text: "Setting The Stage..." },
+            { limit: 90, text: "Polishing Details..." },
+            { limit: 99, text: "Ready..." },
+            { limit: 100, text: "Welcome" }
+        ];
+
+        function setProgress(val) {
+            progress = Math.max(progress, val);
+            
+            // Find appropriate text
+            if (preloaderStatus) {
+                for (var i = 0; i < statusTexts.length; i++) {
+                    if (progress <= statusTexts[i].limit || statusTexts[i].limit === 100) {
+                        preloaderStatus.textContent = statusTexts[i].text;
+                        break;
+                    }
+                }
+            }
+
+            if (progress >= 100) {
+                setTimeout(function() {
+                    preloader.classList.add('fade-out');
+                }, 500);
+            }
+        }
+        
+        // Start dummy progress loading
+        var timer = setInterval(function() {
+            if (progress < 85) {
+                setProgress(progress + Math.floor(Math.random() * 8) + 2);
+            }
+        }, 120);
+
+        // Listen to the first active video ready state
+        var activeVideo = document.querySelector('.hero__vid--active');
+        if (activeVideo) {
+            activeVideo.addEventListener('canplay', function onVideoCanPlay() {
+                setProgress(100);
+                clearInterval(timer);
+                activeVideo.removeEventListener('canplay', onVideoCanPlay);
+            });
+        }
+
+        // Fallback if video takes too long or page loads fully
+        window.addEventListener('load', function() {
+            setProgress(100);
+            clearInterval(timer);
+        });
+    }
+})();
+
+addEventListener('load',function(){var v=document.querySelectorAll('video'),l=0;v.forEach(function(x){if(x.readyState>=2)l++;});console.log('%c\u2726 Creative Events by Apollo %c\u00b7 %cThe Light Smile %c\u00b7 Vadakara, Kerala','color:#B99A5F;','color:#7B746A;','font-style:italic;color:#7B746A;','font-size:0.7rem;color:#B0ACA5;');console.log('Videos loaded initially: '+l+'/'+v.length);});
 })();
