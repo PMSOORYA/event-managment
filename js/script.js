@@ -30,8 +30,8 @@ window.scrollTo=window.scrollToSection;
 /* === NAV === */
 function ns(){DOM.nav.classList.toggle('scrolled',scrollY>30);}
 addEventListener('scroll',ns,{passive:true});ns();
-function tm(){DOM.menu.classList.contains('mobile-open')?cm():(DOM.menu.classList.add('mobile-open'),DOM.burger.classList.add('active'),DOM.burger.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');}
-function cm(){DOM.menu.classList.remove('mobile-open');DOM.burger.classList.remove('active');DOM.burger.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function tm(){DOM.menu.classList.contains('mobile-open')?cm():(DOM.menu.classList.add('mobile-open'),DOM.nav.classList.add('menu-open'),DOM.burger.classList.add('active'),DOM.burger.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');}
+function cm(){DOM.menu.classList.remove('mobile-open');DOM.nav.classList.remove('menu-open');DOM.burger.classList.remove('active');DOM.burger.setAttribute('aria-expanded','false');document.body.style.overflow='';}
 DOM.burger.addEventListener('click',tm);
 if(DOM.menuClose) DOM.menuClose.addEventListener('click',cm);
 DOM.links.forEach(function(l){l.addEventListener('click',function(){if(DOM.menu.classList.contains('mobile-open'))cm();});});

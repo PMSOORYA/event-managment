@@ -140,7 +140,7 @@
             <a href="#experience" class="nav__link">Experience</a>
             <a href="#faq" class="nav__link">FAQ</a>
             <a href="#contact" class="nav__link">Contact</a>
-            <button class="btn btn--pill nav__btn-mob" onclick="openWhatsApp()">WhatsApp Enquiry</button>
+            <button class="btn btn--champagne btn--pill nav__btn-mob" onclick="openWhatsApp()">WhatsApp Enquiry</button>
         </nav>
         <button class="btn btn--pill nav__btn" onclick="openWhatsApp()">WhatsApp Enquiry</button>
         <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
@@ -249,13 +249,13 @@
                     </div>
                 </div>
             </div>
-            <div class="svc"><span class="svc__num">02</span><h3>Engagement Functions</h3><p>Romantic engagement setups with soft florals, elegant styling, and warm coordination for families in Kerala.</p></div>
-            <div class="svc"><span class="svc__num">03</span><h3>Birthday Event Planning</h3><p>Joyful birthday celebrations with themed décor, beautiful backdrops, and complete party coordination in Vadakara and Kozhikode.</p></div>
-            <div class="svc"><span class="svc__num">04</span><h3>Corporate Event Planning</h3><p>Professional corporate event management with refined styling, smooth logistics, and elevated guest experiences across Kerala.</p></div>
-            <div class="svc"><span class="svc__num">05</span><h3>Stage Decoration</h3><p>Stunning stage designs with premium florals, soft lighting, and creative backdrops for weddings and events in Vadakara.</p></div>
-            <div class="svc"><span class="svc__num">06</span><h3>Theme Decoration</h3><p>Fully customised theme celebrations where every detail — from décor to colour palette — tells one beautiful, cohesive story.</p></div>
-            <div class="svc"><span class="svc__num">07</span><h3>Private Parties</h3><p>Exclusive private gatherings with personality, style, and a relaxed yet elegant atmosphere for family and friends.</p></div>
-            <div class="svc"><span class="svc__num">08</span><h3>Outdoor Celebrations</h3><p>Beautiful open-air events with natural elegance, soft settings, and memorable moments across Kerala locations.</p></div>
+            <div class="svc" onclick="enquireService('Engagement Functions')"><span class="svc__num">02</span><h3>Engagement Functions</h3><p>Romantic engagement setups with soft florals, elegant styling, and warm coordination for families in Kerala.</p></div>
+            <div class="svc" onclick="enquireService('Birthday Event Planning')"><span class="svc__num">03</span><h3>Birthday Event Planning</h3><p>Joyful birthday celebrations with themed décor, beautiful backdrops, and complete party coordination in Vadakara and Kozhikode.</p></div>
+            <div class="svc" onclick="enquireService('Corporate Event Planning')"><span class="svc__num">04</span><h3>Corporate Event Planning</h3><p>Professional corporate event management with refined styling, smooth logistics, and elevated guest experiences across Kerala.</p></div>
+            <div class="svc" onclick="enquireService('Stage Decoration')"><span class="svc__num">05</span><h3>Stage Decoration</h3><p>Stunning stage designs with premium florals, soft lighting, and creative backdrops for weddings and events in Vadakara.</p></div>
+            <div class="svc" onclick="enquireService('Theme Decoration')"><span class="svc__num">06</span><h3>Theme Decoration</h3><p>Fully customised theme celebrations where every detail — from décor to colour palette — tells one beautiful, cohesive story.</p></div>
+            <div class="svc" onclick="enquireService('Private Parties')"><span class="svc__num">07</span><h3>Private Parties</h3><p>Exclusive private gatherings with personality, style, and a relaxed yet elegant atmosphere for family and friends.</p></div>
+            <div class="svc" onclick="enquireService('Outdoor Celebrations')"><span class="svc__num">08</span><h3>Outdoor Celebrations</h3><p>Beautiful open-air events with natural elegance, soft settings, and memorable moments across Kerala locations.</p></div>
         </div>
     </div>
 </section>
@@ -402,9 +402,9 @@
             <p class="contact__sub">Share your event details and get a custom planning response through WhatsApp.</p>
             <p class="contact__note">We&rsquo;ll help you shape the celebration from the first idea.</p>
             <div class="contact__info">
-                <div class="contact__info-item"><span>✧</span><div><h5>Phone &amp; WhatsApp</h5><p>+91 94461 34182</p></div></div>
-                <div class="contact__info-item"><span>✧</span><div><h5>Location</h5><p>Vadakara, Kozhikode, Kerala</p></div></div>
-                <div class="contact__info-item"><span>✧</span><div><h5>Email</h5><p>hello@creativeeventsapollo.com</p></div></div>
+                <div class="contact__info-item"><span>✧</span><div><h5>Phone &amp; WhatsApp</h5><p><a href="tel:+919446134182" class="contact__link">+91 94461 34182</a></p></div></div>
+                <div class="contact__info-item"><span>✧</span><div><h5>Location</h5><p><a href="https://maps.google.com/?q=Creative+Events+by+Apollo+Vadakara+Kozhikode+Kerala" target="_blank" rel="noopener noreferrer" class="contact__link">Vadakara, Kozhikode, Kerala</a></p></div></div>
+                <div class="contact__info-item"><span>✧</span><div><h5>Email</h5><p><a href="mailto:hello@creativeeventsapollo.com" class="contact__link">hello@creativeeventsapollo.com</a></p></div></div>
             </div>
         </div>
         <form class="contact__form" id="enquiryForm" novalidate>
@@ -432,7 +432,7 @@
             <div class="foot__links">
                 <div><h5>Navigate</h5><a href="#home" onclick="scrollToSection('home'); return false;">Home</a><a href="#services" onclick="scrollToSection('services'); return false;">Services</a><a href="#portfolio" onclick="scrollToSection('portfolio'); return false;">Portfolio</a><a href="#experience" onclick="scrollToSection('experience'); return false;">Experience</a><a href="#faq" onclick="scrollToSection('faq'); return false;">FAQ</a><a href="#contact" onclick="scrollToSection('contact'); return false;">Contact</a></div>
                 <div><h5>Services</h5><a href="#services" onclick="scrollToSection('services'); return false;">Weddings</a><a href="#services" onclick="scrollToSection('services'); return false;">Birthdays</a><a href="#services" onclick="scrollToSection('services'); return false;">Corporate</a><a href="#services" onclick="scrollToSection('services'); return false;">Stage Décor</a><a href="#services" onclick="scrollToSection('services'); return false;">Theme Events</a></div>
-                <div><h5>Connect</h5><a href="#" onclick="openWhatsApp(); return false;">WhatsApp</a><a href="#" onclick="return false;" aria-label="Instagram — replace with real link">Instagram</a><a href="mailto:hello@creativeeventsapollo.com">Email</a></div>
+                <div><h5>Connect</h5><a href="#" onclick="openWhatsApp(); return false;">WhatsApp</a><a href="https://instagram.com/creativeeventsapollo" target="_blank" rel="noopener noreferrer">Instagram</a><a href="mailto:hello@creativeeventsapollo.com">Email</a></div>
             </div>
         </div>
         <div class="foot__bottom"><p>&copy; 2026 Creative Events by Apollo. All rights reserved. | Vadakara, Kozhikode, Kerala</p></div>
