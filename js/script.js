@@ -316,7 +316,7 @@ document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',
             if (progress >= 100) {
                 setTimeout(function() {
                     preloader.classList.add('fade-out');
-                }, 500);
+                }, 200);
             }
         }
         
@@ -342,6 +342,12 @@ document.querySelectorAll('img').forEach(function(i){i.addEventListener('error',
             setProgress(100);
             clearInterval(timer);
         });
+
+        // Hard maximum cap — never wait more than 3 seconds
+        setTimeout(function() {
+            setProgress(100);
+            clearInterval(timer);
+        }, 3000);
     }
 })();
 
